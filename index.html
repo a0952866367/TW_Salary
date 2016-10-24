@@ -22,12 +22,14 @@ h1 {
 }
 
 text {
-  font: 16px 'cwTeXYen',sans-serif;
+  font-family:'cwTeXYen',sans-serif;
+  color: #4d4d4d;
 }
 
 .bars {
   margin: auto;
   font: 20px 'cwTeXYen',sans-serif;
+  color: #4d4d4d;
   margin-top: 30px;
 }
 
@@ -71,6 +73,12 @@ text {
   shape-rendering: crispEdges;
 }
 
+.y {
+  font-family:'cwTeXYen',sans-serif;
+  fill: #4d4d4d;
+}
+
+
 </style>
 
 <body>
@@ -78,10 +86,12 @@ text {
   <div align="center" class="bars">
       <a class="check-box-male"><input type="checkbox" id="maleAverage">男性平均薪資</a>
       <a class="check-box-female"><input type="checkbox" id="femaleAverage">女性平均薪資</a>
-      <label><input class="maleChart" type="radio" name="mode" value="stacked" checked>Male </label>
-      <label><input class="femaleChart" type="radio" name="mode" value="stacked" checked>Female </label>
-      <label><input class="chart" type="radio" name="mode" value="grouped">Grouped</label>
-      <label><input class="chart" type="radio" name="mode" value="stacked" checked>Stacked </label>
+      <label><input class="chart" type="radio" name="mode" value="stacked" checked>最高薪資行業 </label>
+      <label><input class="chart" type="radio" name="mode" value="grouped">同行業男女差異</label>
+      <label><input class="maleChart" type="radio" name="mode" value="stacked">男性最高薪資行業 </label>
+      <label><input class="femaleChart" type="radio" name="mode" value="stacked">女性最高薪資行業 </label>
+
+
   </div>
   <div class="svg-chart"></div>
 </body>
@@ -221,7 +231,7 @@ d3.csv("data/salary.csv", function(error, data) {
      .style("font-size","18px")
      .style("font-weight", "normal")
      .style("text-anchor", "start")
-     .style("color","#4d4d4d")
+     .style("fill","#4d4d4d")
      .attr("dx", "-0.1em")
      .attr("dy", "1em")
      .attr("transform", "rotate(25)" );
@@ -232,6 +242,7 @@ d3.csv("data/salary.csv", function(error, data) {
      .append("text")
      .style("font-size","16px")
      .style("font-weight", "normal")
+     .style("fill","#4d4d4d")
      .text("時薪(NTD)")
      .attr("x", -7)
      .attr("y", -3)
