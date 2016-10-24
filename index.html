@@ -18,7 +18,7 @@ h1 {
 .svg-chart {
   margin: auto;
   position: relative;
-  width: 965px;
+  width: 960px;
 }
 
 text {
@@ -103,7 +103,7 @@ var maleSelector = ["hourMale"];
 var femaleSelector = ["hourFemale"];
 var timeout;//change to grouped mode in ? second
 var margin = {top: 60, right: 90, bottom: 110, left: 90},
-    width = 965 - margin.left - margin.right,
+    width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 var tip = d3.tip()
@@ -228,7 +228,7 @@ d3.csv("data/salary.csv", function(error, data) {
      .attr("transform", "translate(0," + height + ")")
      .call(xAxis)
      .selectAll("text")
-     .style("font-size","18px")
+     .style("font-size","16px")
      .style("font-weight", "normal")
      .style("text-anchor", "start")
      .style("fill","#4d4d4d")
@@ -335,7 +335,7 @@ function changeMale(){
      .duration(1000)
      .call(xAxis)
      .selectAll("text")
-     .style("font-size","18px")
+     .style("font-size","16px")
      .style("font-weight", "normal")
      .style("text-anchor", "start")
      .attr("dx", "-0.1em")
@@ -363,7 +363,7 @@ function changeFemale(){
      .duration(1000)
      .call(xAxis)
      .selectAll("text")
-     .style("font-size","18px")
+     .style("font-size","16px")
      .style("font-weight", "normal")
      .style("text-anchor", "start")
      .attr("dx", "-0.1em")
@@ -391,7 +391,7 @@ function transitionGrouped() {
      .duration(1000)
      .call(xAxis)
      .selectAll("text")
-     .style("font-size","18px")
+     .style("font-size","16px")
      .style("font-weight", "normal")
      .style("text-anchor", "start")
      .attr("dx", "-0.1em")
@@ -425,7 +425,7 @@ function transitionStacked() {
      .duration(1000)
      .call(xAxis)
      .selectAll("text")
-     .style("font-size","18px")
+     .style("font-size","16px")
      .style("font-weight", "normal")
      .style("text-anchor", "start")
      .attr("dx", "-0.1em")
