@@ -22,12 +22,14 @@ h1 {
 }
 
 text {
-  font: 16px 'cwTeXYen',sans-serif;
+  font-family:'cwTeXYen',sans-serif;
+  color: #4d4d4d;
 }
 
 .bars {
   margin: auto;
   font: 20px 'cwTeXYen',sans-serif;
+  color: #4d4d4d;
   margin-top: 30px;
 }
 
@@ -39,7 +41,7 @@ text {
   line-height: 1;
   font-weight: normal;
   padding: 7px;
-  font-size: 14px;
+  font: 16px 'cwTeXYen',sans-serif;
   background: #595959;
   color: #fff;
   border-radius: 4px;
@@ -49,7 +51,7 @@ text {
 .d3-tip:after {
   box-sizing: border-box;
   display: inline;
-  font-size: 14px;
+  font: 16px 'cwTeXYen',sans-serif;
   width: 100%;
   line-height: 1;
   color: #595959;
@@ -61,7 +63,7 @@ text {
 /* Style northward tooltips differently */
 .d3-tip.n:after {
   margin: -1px 0 0 0;
-  top: 100%;
+  top: 95%;
   left: 0;
 }
 
@@ -71,6 +73,12 @@ text {
   shape-rendering: crispEdges;
 }
 
+.y {
+  font-family:'cwTeXYen',sans-serif;
+  fill: #4d4d4d;
+}
+
+
 </style>
 
 <body>
@@ -78,10 +86,12 @@ text {
   <div align="center" class="bars">
       <a class="check-box-male"><input type="checkbox" id="maleAverage">男性平均薪資</a>
       <a class="check-box-female"><input type="checkbox" id="femaleAverage">女性平均薪資</a>
-      <label><input class="maleChart" type="radio" name="mode" value="stacked" checked>Male </label>
-      <label><input class="femaleChart" type="radio" name="mode" value="stacked" checked>Female </label>
-      <label><input class="chart" type="radio" name="mode" value="grouped">Grouped</label>
-      <label><input class="chart" type="radio" name="mode" value="stacked" checked>Stacked </label>
+      <label><input class="chart" type="radio" name="mode" value="stacked" checked>各行業薪資 </label>
+      <label><input class="chart" type="radio" name="mode" value="grouped">男女薪資差異</label>
+      <label><input class="maleChart" type="radio" name="mode" value="stacked">男性薪資 </label>
+      <label><input class="femaleChart" type="radio" name="mode" value="stacked">女性薪資 </label>
+
+
   </div>
   <div class="svg-chart"></div>
 </body>
@@ -92,8 +102,8 @@ var selector = ["hourMale", "hourFemale"];
 var maleSelector = ["hourMale"];
 var femaleSelector = ["hourFemale"];
 var timeout;//change to grouped mode in ? second
-var margin = {top: 60, right: 80, bottom: 100, left: 80},
-    width = 960 - margin.left - margin.right,
+var margin = {top: 60, right: 90, bottom: 110, left: 90},
+    width = 1080 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 var tip = d3.tip()
@@ -221,7 +231,7 @@ d3.csv("data/salary.csv", function(error, data) {
      .style("font-size","18px")
      .style("font-weight", "normal")
      .style("text-anchor", "start")
-     .style("color","#4d4d4d")
+     .style("fill","#4d4d4d")
      .attr("dx", "-0.1em")
      .attr("dy", "1em")
      .attr("transform", "rotate(25)" );
@@ -230,9 +240,10 @@ d3.csv("data/salary.csv", function(error, data) {
      .attr("class", "y axis")
      .call(yAxis)
      .append("text")
-     .style("font-size","18px")
+     .style("font-size","16px")
      .style("font-weight", "normal")
-     .text("新台幣/時")
+     .style("fill","#4d4d4d")
+     .text("時薪(NTD)")
      .attr("x", -7)
      .attr("y", -3)
      .attr("dy", ".71em")
