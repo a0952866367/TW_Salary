@@ -1,28 +1,38 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<title>2015年台灣薪資</title>
+<head>
+    <meta charset="utf-8">
+    <title>2015年台灣薪資</title>
+    <script src="d3.v3.min.js"></script>
+    <script src="d3.tip.v0.6.3.js"></script>
+     <link href="http://fonts.googleapis.com/earlyaccess/cwtexyen.css" rel="stylesheet">
+</head>
 
 <style>
-/*h1 {
+h1 {
   font-size: 50px;
   color: #4d4d4d;
   text-align: center;
   margin-top: 20px auto;
 }
 
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+.svg-chart {
   margin: auto;
   position: relative;
   width: 960px;
 }
 
 text {
-  font: 10px sans-serif;
-}*/
+  font: 16px 'cwTeXYen',sans-serif;
+}
 
-body {
-  font:sans-serif;
+.bars {
+  margin: auto;
+  font: 20px 'cwTeXYen',sans-serif;
+  margin-top: 30px;
+}
+
+.check-box-female {
+  margin-right: 150px;
 }
 
 .d3-tip {
@@ -61,34 +71,20 @@ body {
   shape-rendering: crispEdges;
 }
 
-/*form {
-  position: absolute;
-  right: 80px;
-  top: 100px;
-}
-
-a {
-  position: relative;
-  right: 250px;
-}*/
-
 </style>
 
 <body>
   <h1>2015年台灣薪資</h1>
+  <div align="center" class="bars">
+      <a class="check-box-male"><input type="checkbox" id="maleAverage">男性平均薪資</a>
+      <a class="check-box-female"><input type="checkbox" id="femaleAverage">女性平均薪資</a>
+      <label><input class="maleChart" type="radio" name="mode" value="stacked" checked>Male </label>
+      <label><input class="femaleChart" type="radio" name="mode" value="stacked" checked>Female </label>
+      <label><input class="chart" type="radio" name="mode" value="grouped">Grouped</label>
+      <label><input class="chart" type="radio" name="mode" value="stacked" checked>Stacked </label>
+  </div>
+  <div class="svg-chart"></div>
 </body>
-
-<form>
-  <a><input type="checkbox" id="maleAverage">Male Average</a>
-  <a><input type="checkbox" id="femaleAverage">Female Average</a>
-  <label><input class="maleChart" type="radio" name="mode" value="stacked" checked>Male </label>
-  <label><input class="femaleChart" type="radio" name="mode" value="stacked" checked>Female </label>
-  <label><input class="chart" type="radio" name="mode" value="grouped">Grouped</label>
-  <label><input class="chart" type="radio" name="mode" value="stacked" checked>Stacked </label>
-</form>
-
-<script src="d3.v3.min.js"></script>
-<script src="d3.tip.v0.6.3.js"></script>
 
 <script>
 
@@ -100,16 +96,6 @@ var margin = {top: 60, right: 80, bottom: 100, left: 80},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-// var tip = d3.tip()
-//       .attr('class', 'd3-tip')
-//       .offset([-10, -70])
-//       .html(function(d) {
-//           // return "<span style='color:white'>" + d.x +"</span>"+"<br>"+"<strong>時薪(NTD/Hour):</strong> <span style='color:red'>" + d.y + "</span>";
-//           //return "<span style='color:white'>" + d.x +"</span>"+"<br>" + "<span style='color:white'>" + (d.y).toFixed(1) + "</span>";
-//           return (d.y).toFixed(1);
-//       })
-//       .style("position", "absolute")
-
 var tip = d3.tip()
     .attr('class', 'd3-tip')
     .offset([-10, 0])
@@ -117,7 +103,7 @@ var tip = d3.tip()
     return "<span style='color:white'>" + (d.y).toFixed(2) + "</span>";
   })
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select(".svg-chart").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -232,7 +218,7 @@ d3.csv("data/salary.csv", function(error, data) {
      .attr("transform", "translate(0," + height + ")")
      .call(xAxis)
      .selectAll("text")
-     .style("font-size","14px")
+     .style("font-size","18px")
      .style("font-weight", "normal")
      .style("text-anchor", "start")
      .style("color","#4d4d4d")
@@ -244,9 +230,9 @@ d3.csv("data/salary.csv", function(error, data) {
      .attr("class", "y axis")
      .call(yAxis)
      .append("text")
-     .style("font-size","14px")
+     .style("font-size","18px")
      .style("font-weight", "normal")
-     .text("NTD / Hour")
+     .text("新台幣/時")
      .attr("x", -7)
      .attr("y", -3)
      .attr("dy", ".71em")
@@ -265,21 +251,21 @@ d3.csv("data/salary.csv", function(error, data) {
      .attr("y1",y(maleAvg))//start y
      .attr("x2",width)//end x
      .attr("y2",y(maleAvg))//end y
-     .attr("stroke","#000099")
+     .attr("stroke","#3333ff")
      .attr("stroke-width",2)
      .attr("stroke-dasharray",10)
      .attr("id","maleLine")
      .style("opacity",0)
 
   svg.append("text")//male line text
-     .attr("x",width/2.4)
-     .attr("y",y(maleAvg+25) )
+     .attr("x",-47)
+     .attr("y",y(maleAvg) )
      .attr("dy", ".35em")
-     .attr("fill","#000099")
+     .attr("fill","#3333ff")
      .style("font-weight", "normal")
-     .style("font-size","14px")
+     .style("font-size","16px")
      .attr("id","maleLineText")
-     .text("Male Average : 326.53")
+     .text(maleAvg.toFixed(0)+" $")
      .style("opacity",0)
 
   var maleOpacity;
@@ -297,21 +283,21 @@ d3.csv("data/salary.csv", function(error, data) {
      .attr("y1",y(femaleAvg))//start y
      .attr("x2",width)//end x
      .attr("y2",y(femaleAvg))//end y
-     .attr("stroke","#b30000")
+     .attr("stroke","#cc0000")
      .attr("stroke-width",2)
      .attr("stroke-dasharray",10)
      .attr("id","femaleLine")
      .style("opacity",0)
 
   svg.append("text")//female line text
-     .attr("x",width/2.4-5)
-     .attr("y",y(femaleAvg+25) )
+     .attr("x",-47)
+     .attr("y",y(femaleAvg) )
      .attr("dy", ".35em")
-     .attr("fill","#b30000")
-     .style("font-size","14px")
+     .attr("fill","#cc0000")
+     .style("font-size","16px")
      .style("font-weight", "normal")
      .attr("id","femaleLineText")
-     .text("Female Average : 264.74")
+     .text(femaleAvg.toFixed(0)+" $")
      .style("opacity",0)
 
   var femaleOpacity;
@@ -338,7 +324,7 @@ function changeMale(){
      .duration(1000)
      .call(xAxis)
      .selectAll("text")
-     .style("font-size","14px")
+     .style("font-size","18px")
      .style("font-weight", "normal")
      .style("text-anchor", "start")
      .attr("dx", "-0.1em")
@@ -366,7 +352,7 @@ function changeFemale(){
      .duration(1000)
      .call(xAxis)
      .selectAll("text")
-     .style("font-size","14px")
+     .style("font-size","18px")
      .style("font-weight", "normal")
      .style("text-anchor", "start")
      .attr("dx", "-0.1em")
@@ -394,7 +380,7 @@ function transitionGrouped() {
      .duration(1000)
      .call(xAxis)
      .selectAll("text")
-     .style("font-size","14px")
+     .style("font-size","18px")
      .style("font-weight", "normal")
      .style("text-anchor", "start")
      .attr("dx", "-0.1em")
@@ -428,7 +414,7 @@ function transitionStacked() {
      .duration(1000)
      .call(xAxis)
      .selectAll("text")
-     .style("font-size","14px")
+     .style("font-size","18px")
      .style("font-weight", "normal")
      .style("text-anchor", "start")
      .attr("dx", "-0.1em")
