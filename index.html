@@ -87,9 +87,9 @@ text {
       <a class="check-box-male"><input type="checkbox" id="maleAverage">男性平均薪資</a>
       <a class="check-box-female"><input type="checkbox" id="femaleAverage">女性平均薪資</a>
       <label><input class="chart" type="radio" name="mode" value="stacked" checked>最高薪資行業 </label>
-      <label><input class="chart" type="radio" name="mode" value="grouped">同行業男女差異</label>
-      <label><input class="maleChart" type="radio" name="mode" value="stacked">男性最高薪資行業 </label>
-      <label><input class="femaleChart" type="radio" name="mode" value="stacked">女性最高薪資行業 </label>
+      <label><input class="chart" type="radio" name="mode" value="grouped">男女薪資差異</label>
+      <label><input class="maleChart" type="radio" name="mode" value="stacked">男性薪資 </label>
+      <label><input class="femaleChart" type="radio" name="mode" value="stacked">女性薪資 </label>
 
 
   </div>
@@ -102,7 +102,7 @@ var selector = ["hourMale", "hourFemale"];
 var maleSelector = ["hourMale"];
 var femaleSelector = ["hourFemale"];
 var timeout;//change to grouped mode in ? second
-var margin = {top: 60, right: 85, bottom: 100, left: 85},
+var margin = {top: 60, right: 85, bottom: 110, left: 85},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
